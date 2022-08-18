@@ -21,7 +21,7 @@ parser.add_argument('--config',  '-c',
                     dest="filename",
                     metavar='FILE',
                     help='path to the config file',
-                    default='configs/erm.yaml')
+                    default='configs/configs_mnist/erm_mnist.yaml')
 
 args = parser.parse_args()
 with open(args.filename, 'r') as file:
@@ -50,7 +50,7 @@ if config['dataset'] == 'mnist':
         # Load pretrained model
         if config['model_params']['pretrained'] == True:
             print("Loading pretrained model!")
-            experiment = experiment.load_from_checkpoint('/home/qingzhong/code/Exemplar_transfer_generation/logs/Exemplar_Transfer_Generation/NoPF3000/checkpoints/last.ckpt')
+            experiment = experiment.load_from_checkpoint('path_of_model_checkpoint!')
             print("Load model success!")
         experiment.to('cuda')
         experiment.eval()
@@ -64,7 +64,7 @@ if config['dataset'] == 'mnist':
         if config['model_params']['pretrained'] == True:
             print("Loading pretrained model!")
             model = model.load_from_checkpoint(
-                '/home/qingzhong/code/Exemplar_transfer_generation/logs/Condition_VAE_MLP_MNIST/Pretrain_model_m60/checkpoints/last.ckpt',
+                'path_of_model_checkpoint!',
                 **config['model_params'], 
                 params=config['exp_params']
             )
@@ -79,7 +79,7 @@ if config['dataset'] == 'mnist':
         model = CGAN(**config['model_params'])
         if config['model_params']['pretrained'] == True:
             print("Loading pretrained model!")
-            model_path = "logs/CGAN/Pretrain_model_m60/checkpoints/epoch=49-step=15449.ckpt"
+            model_path = "path_of_model_checkpoint!"
             print(model_path)
             model = model.load_from_checkpoint(
                 model_path,
@@ -106,7 +106,7 @@ elif config['dataset'] == 'fashionmnist':
         # Load pretrained model
         if config['model_params']['pretrained'] == True:
             print("Loading pretrained model!")
-            experiment = experiment.load_from_checkpoint('logs/Exemplar_Transfer_Generation_Fashion/Pretrain_exemplar_0_4_m10_ewc5e4_ns_lr0.005_s100/checkpoints/last.ckpt')
+            experiment = experiment.load_from_checkpoint('path_of_model_checkpoint!')
             print("Load model success!")
         experiment.to('cuda')
         experiment.eval()
@@ -120,7 +120,7 @@ elif config['dataset'] == 'fashionmnist':
         if config['model_params']['pretrained'] == True:
             print("Loading pretrained model!")
             model = model.load_from_checkpoint(
-                'logs/Condition_VAE_MLP_FashionMNIST/Pretrain_model_m10/checkpoints/last.ckpt',
+                'path_of_model_checkpoint!',
                 **config['model_params'],
                 params=config['exp_params']
             )
@@ -146,7 +146,7 @@ elif config['dataset'] == 'celeba':
         if config['model_params']['pretrained'] == True:
             print("Loading pretrained model!")
             model_bald = model.load_from_checkpoint(
-                'logs/ETG_Longtail_Celeba/Pretrain_exemplar_bald_ewc50/checkpoints/epoch=99-step=2499.ckpt',
+                'path_of_model_checkpoint!',
                 **config["model_params"],
                 exemplar_data=exemplar_data,
                 params=config['exp_params']
@@ -154,7 +154,7 @@ elif config['dataset'] == 'celeba':
             model_bald.to('cuda')
             model_bald.eval()
             model_blonde = model.load_from_checkpoint(
-                'logs/ETG_Longtail_Celeba/Pretrain_exemplar_blonde_ewc50/checkpoints/epoch=99-step=9999.ckpt',
+                'path_of_model_checkpoint!',
                 **config["model_params"],
                 exemplar_data=exemplar_data,
                 params=config['exp_params']
@@ -162,7 +162,7 @@ elif config['dataset'] == 'celeba':
             model_blonde.to('cuda')
             model_blonde.eval()
             model_brown = model.load_from_checkpoint(
-                'logs/ETG_Longtail_Celeba/Pretrain_exemplar_brown_ewc50/checkpoints/epoch=99-step=999.ckpt',
+                'path_of_model_checkpoint!',
                 **config["model_params"],
                 exemplar_data=exemplar_data,
                 params=config['exp_params']
@@ -170,7 +170,7 @@ elif config['dataset'] == 'celeba':
             model_brown.to('cuda')
             model_brown.eval()
             model_gray = model.load_from_checkpoint(
-                'logs/ETG_Longtail_Celeba/Pretrain_exemplar_gray_ewc50/checkpoints/epoch=99-step=199.ckpt',
+                'path_of_model_checkpoint!',
                 **config["model_params"],
                 exemplar_data=exemplar_data,
                 params=config['exp_params']
@@ -189,7 +189,7 @@ elif config['dataset'] == 'celeba':
         if config['model_params']['pretrained'] == True:
             print("Loading pretrained model!")
             model = model.load_from_checkpoint(
-                'logs/Condition_VAE/version_0/checkpoints/last.ckpt',
+                'path_of_model_checkpoint!',
                 **config['model_params'], 
                 params=config['exp_params']
             )
@@ -205,7 +205,7 @@ elif config['dataset'] == 'celeba':
         if config['model_params']['pretrained'] == True:
             print("Loading pretrained model!")
             model = model.load_from_checkpoint(
-                'logs/CDCGAN/version_2/checkpoints/epoch=99-step=33699.ckpt',
+                'path_of_model_checkpoint!',
                 **config['model_params']
             )
             model.to('cuda')
@@ -231,7 +231,7 @@ elif config['dataset'] == 'tabular':
         if config['model_params']['pretrained'] == True:
             print("Loading pretrained model!")
             experiment = experiment.load_from_checkpoint(
-                'logs/Exemplar_Transfer_Generation_Huawei_1/version_0/checkpoints/epoch=99-step=99.ckpt'
+                'path_of_model_checkpoint!'
             )
             print("Load model success!")
         experiment.to('cuda')
@@ -245,7 +245,7 @@ elif config['dataset'] == 'tabular':
         if config['model_params']['pretrained'] == True:
             print("Loading pretrained model!")
             model = model.load_from_checkpoint(
-                'logs/Exemplar_Transfer_Generation_Huawei/Pretrain_model_ewc500/checkpoints/last.ckpt',
+                'path_of_model_checkpoint!',
                 **config['model_params'], 
                 params=config['exp_params']
             )

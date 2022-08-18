@@ -11,7 +11,7 @@ model_params:
 
 
 data_params_majority:
-  data_path: "/home/qingzhong/data/UCI"
+  data_path: "path of data!!!"
   data_name: "musk"
   train_batch_size: 100
   val_batch_size: 100
@@ -21,7 +21,7 @@ data_params_majority:
 
 
 data_params_minority:
-  data_path: "/home/qingzhong/data/UCI"
+  data_path: "path of data!!!"
   data_name: "musk"
   train_batch_size: 100
   val_batch_size: 100

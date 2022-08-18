@@ -57,7 +57,7 @@ if config['model_params']['pretrained'] == True:
     print("Loading pretrained model!")
     if config['model_params']['name'] == "CDCGAN":
         model = model.load_from_checkpoint(
-            ''
+            'path of pretrained model!!!'
         )
     print("Load model success!")
 

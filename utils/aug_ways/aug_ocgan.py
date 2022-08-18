@@ -37,13 +37,13 @@ def cond_gan_aug(data, targets, model):
             new_samples_save = model.cond_sample(y=label)
             new_samples = new_samples_save.detach().squeeze()
 
-            if i == 0:
-                vutils.save_image(new_samples_save.data,
-                            os.path.join('/home/qingzhong/code/Exemplar_transfer_generation/logs/CGAN_mnist', 
-                                        "Generation", 
-                                        f"Gen_{k}.png"),
-                            normalize=False,
-                            nrow=10)
+            # if i == 0:
+            #     vutils.save_image(new_samples_save.data,
+            #                 os.path.join('/home/qingzhong/code/Exemplar_transfer_generation/logs/CGAN_mnist', 
+            #                             "Generation", 
+            #                             f"Gen_{k}.png"),
+            #                 normalize=False,
+            #                 nrow=10)
             aug_samples[index] = new_samples
 
             i += per_samples

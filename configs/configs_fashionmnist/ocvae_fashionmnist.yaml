@@ -11,7 +11,7 @@ model_params:
   pretrained: True
 
 data_params_aug:
-  data_path: "/home/qingzhong/data/"
+  data_path: "path of fashionmnist!!!"
   train_batch_size: 100
   val_batch_size: 100
   num_workers: 4

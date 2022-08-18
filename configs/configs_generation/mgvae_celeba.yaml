@@ -9,7 +9,7 @@ model_params:
   pretrained: False
 
 data_params_majority:
-  data_path: "/home/qingzhong/data/celeba/celeba_black_hair_20000_2000"
+  data_path: "path of majority celeba data!!!"
   train_batch_size: 100
   val_batch_size: 100
   num_workers: 4
@@ -17,10 +17,7 @@ data_params_majority:
 
 
 data_params_minority:
-  # data_path: "/home/qingzhong/data/celeba/celeba_blonde_10000_2000"
-  # data_path: "/home/qingzhong/data/celeba/celeba_bald_2500_2000"
-  # data_path: "/home/qingzhong/data/celeba/celeba_brown_1000_2000"
-  data_path: "/home/qingzhong/data/celeba/celeba_gray_200_2000"
+  data_path: "path of minority celeba data!!!"
   train_batch_size: 100
   val_batch_size: 100
   num_workers: 4

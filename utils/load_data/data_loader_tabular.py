@@ -74,7 +74,8 @@ class TabularDataset(LightningDataModule):
 
 
         elif self.data_name == 'water_quality':
-            data = pd.read_csv("/home/qingzhong/data/Kaggle/water_quality/waterQuality1.csv")
+            path_data = 'Path of waterQuality'
+            data = pd.read_csv(path_data)
             data_value = data.values
 
             x = data_value[:, :-1]
@@ -108,7 +109,8 @@ class TabularDataset(LightningDataModule):
             
 
         elif self.data_name == 'isolet':
-            data = fetch_datasets(data_home='/home/qingzhong/data/')['isolet']
+            path_data = 'Path of isolet'
+            data = fetch_datasets(data_home=path_data)['isolet']
             X = data.data
             y = data.target
 

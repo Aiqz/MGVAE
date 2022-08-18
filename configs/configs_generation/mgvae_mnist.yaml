@@ -10,7 +10,7 @@ model_params:
 
 
 data_params_majority:
-  data_path: "/home/qingzhong/data"
+  data_path: "path of mnist!!!"
   train_batch_size: 100
   val_batch_size: 100
   patch_size: 64
@@ -21,7 +21,7 @@ data_params_majority:
 
 
 data_params_minority:
-  data_path: "/home/qingzhong/data"
+  data_path: "path of mnist!!!"
   train_batch_size: 100
   val_batch_size: 100
   patch_size: 64

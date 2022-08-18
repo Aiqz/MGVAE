@@ -38,39 +38,6 @@ def aug_mgvae(data, targets, model):
             # For CelebA
             # new_samples = new_samples_save.detach().squeeze()
 
-            if i < 1000:
-                
-                if i == 900:
-                    s_index = list(range(0, 16))
-                    for ii in s_index:
-                        iii = ii * 2
-                        selected_images[j:j+2] = samples_plot[iii:iii+2]
-                        j = j + 2
-                    # selected_images[:] = samples_plot[s_index]
-                    vutils.save_image(selected_images.data,
-                            os.path.join('/home/qingzhong/code/Exemplar_transfer_generation/logs/ETG_fashion', 
-                                        "Generation", 
-                                        "Appendix_fashionmnist_600.png"),
-                            padding=1,
-                            pad_value=255,
-                            normalize=True,
-                            nrow=2)
-                    vutils.save_image(selected_images.data,
-                            os.path.join('/home/qingzhong/code/Exemplar_transfer_generation/logs/ETG_fashion', 
-                                        "Generation", 
-                                        "Appendix_fashionmnist_600.pdf"),
-                            padding=1,
-                            pad_value=255,
-                            normalize=True,
-                            nrow=2)
-
-                vutils.save_image(samples_plot.data,
-                            os.path.join('/home/qingzhong/code/Exemplar_transfer_generation/logs/ETG_fashion', 
-                                        "Generation", 
-                                        f"Gen_{i}.png"),
-                            normalize=True,
-                            nrow=2)
-
             aug_samples[index] = new_samples
 
             i += per_samples
@@ -126,53 +93,6 @@ def aug_mgvae_long_tail(data, targets, model_list):
             # For CelebA
             new_samples = new_samples_save.detach().squeeze()
 
-            if i == 0:
-                reference_images, generated_images = model.index_sample_with_input(index, current_device='cuda')
-                vutils.save_image(reference_images[0:5].data,
-                            os.path.join('/home/qingzhong/code/Exemplar_transfer_generation/logs/ETG_celeba', 
-                                        "Generation", 
-                                        "Black.png"),
-                            normalize=True,
-                            nrow=5)
-                if k == 1:
-                    index_of_reference = [i  for i in range(0, 500, 5)]
-                    index_of_generated = [i+1 for i in index_of_reference]
-                    combined_images[index_of_reference] = reference_images
-                    combined_images[index_of_generated] = generated_images
-                else:
-                    index_of_reference = [i  for i in range(0, 500, 5)]
-                    index_of_generated = [i+k for i in index_of_reference]
-                    combined_images[index_of_generated] = generated_images
-
-                if k == 4:
-
-                    # _index = [14, 20, 34, 41, 44]
-                    # _index = [ 54, 50, 57, 62, 61]
-                    # _index = [0,2,4,5,8,9,11,12,15,22]
-                    _index = [79,84,86,87,88,89,92,94,96,98]
-                    j = 0
-                    for ii in _index:
-                        for iii in range(5):
-                            selected_images[j] = combined_images[ii * 5 + iii]
-                            j = j + 1
-                    vutils.save_image(combined_images.data,
-                            os.path.join('/home/qingzhong/code/Exemplar_transfer_generation/logs/ETG_celeba', 
-                                        "Generation", 
-                                        f"Gen_{i}.png"),
-                            normalize=True,
-                            nrow=5)
-                    vutils.save_image(selected_images.data,
-                            os.path.join('/home/qingzhong/code/Exemplar_transfer_generation/logs/ETG_celeba', 
-                                        "Generation", 
-                                        f"Appendix_celeba_1.png"),
-                            normalize=True,
-                            nrow=5)
-                    vutils.save_image(selected_images.data,
-                            os.path.join('/home/qingzhong/code/Exemplar_transfer_generation/logs/ETG_celeba', 
-                                        "Generation", 
-                                        f"Appendix_celeba_1.pdf"),
-                            normalize=True,
-                            nrow=5)
             aug_samples[index] = new_samples
 
             i += per_samples

@@ -98,7 +98,6 @@ class CelebADataset(LightningDataModule):
                     if self.exemplar_model is None:
                         raise NotImplementedError("No exemplar model!")
                     else:
-                        # aug_data, aug_label = ETG(train_data, train_label, model=self.exemplar_model)
                         aug_data, aug_label = aug_mgvae_long_tail(train_data, train_label, model_list=self.exemplar_model)
                         train_data = torch.cat((train_data, aug_data.detach().cpu()), dim=0)
                         train_label = torch.cat((train_label, aug_label.detach().cpu()), dim=0)

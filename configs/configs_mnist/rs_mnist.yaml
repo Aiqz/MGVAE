@@ -1,7 +1,7 @@
 dataset: mnist
 
 data_params_aug:
-  data_path: "/home/qingzhong/data"
+  data_path: "path of mnist!!!"
   train_batch_size: 100
   val_batch_size: 100
   patch_size: 64

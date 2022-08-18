@@ -1,7 +1,7 @@
 dataset: tabular
 
 data_params_aug:
-  data_path: "/home/qingzhong/data/UCI"
+  data_path: "path of tabular data!!!"
   data_name: "musk"
   train_batch_size: 100
   val_batch_size: 100

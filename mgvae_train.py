@@ -63,10 +63,6 @@ elif config["dataset"] == "tabular":
     data_minority = TabularDataset(**config["data_params_minority"])
     data_minority.setup()
 
-# for standard exemplar-vae inbalanced data
-# data_imbalanced = MNISTDataset(**config["data_params"], pin_memory=len(config['trainer_params']['gpus']) != 0)
-# data_imbalanced.setup()
-
 # Load model
 if config['model_params']['name'] == "MGVAE_MLP":
     model = MGVAE_MLP(**config['model_params'], dataset_loader=data_majority.train_dataloader())
@@ -78,7 +74,6 @@ elif config['model_params']['name'] == "MGVAE_Tabular":
     
 elif config['model_params']['name'] == "MGVAE_Conv":
     model = MGVAE_Conv(**config['model_params'], exemplar_data=exemplar_data, params=config['exp_params'])
-    # model.to('cuda')
 
 
 # Load pretrained model
@@ -86,17 +81,17 @@ if config['model_params']['pretrained'] == True:
     print("Loading pretrained model!")
     if config['model_params']['name'] == "MGVAE_MLP":
         experiment = experiment.load_from_checkpoint(
-            'logs/Exemplar_Transfer_Generation_Fashion/Pretrain_model_0_4/checkpoints/last.ckpt'
+            'path of pretrained model!!!'
         )
 
     elif config['model_params']['name'] == "MGVAE_Tabular":
         experiment = experiment.load_from_checkpoint(
-            'logs/Exemplar_Transfer_Generation_Huawei_1/Pretrain_exemplar_model/checkpoints/last.ckpt'
+            'path of pretrained model!!!'
         )
 
     elif config['model_params']['name'] == "MGVAE_Conv":
         model = model.load_from_checkpoint(
-            'logs/Exemplar_Transfer_Generation_CelebA/Pretrain_model_1_400_nc2000_mse(1)/checkpoints/last.ckpt', 
+            'path of pretrained model!!!', 
             **config['model_params'], 
             exemplar_data=exemplar_data, 
             params=config['exp_params'],
@@ -119,22 +114,6 @@ if config['model_params']['name'] == "MGVAE_Conv" and config['ewc_params']['ewc'
     model.to('cuda')
     model.ewc_pare()
     
-# Save minority
-# print(fashion_data_minority.fashion_mnist_train.data.shape)
-# minotity_samples = fashion_data_minority.fashion_mnist_train.data.float().unsqueeze(dim=1)
-
-# vutils.save_image(minotity_samples,
-#                           os.path.join('/hdd/aiqingzhong/code22/Exemplar_transfer_generation/logs', 
-#                                        "Minority", 
-#                                        f"minority_samples.png"),
-#                           normalize=True,
-#                           nrow=10)
-
-# experiment.to('cuda')
-# experiment.eval()
-# new_samples = experiment.model.sample(1, current_device='cuda').squeeze()
-
-
 runner = Trainer(logger=tb_logger,
                  callbacks=[
                      LearningRateMonitor(),

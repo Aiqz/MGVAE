@@ -71,15 +71,6 @@ class MyMNIST(MNIST):
                     (self.targets, aug_label.detach().cpu()), dim=0)
                 # classes, class_counts = np.unique(self.targets, return_counts=True)
                 # print(class_counts)
-            elif aug == 'exemplar':
-                if exemplar_model == None:
-                    raise NotImplementedError("No exemplar model!")
-                aug_data, aug_label = exemplar_aug(
-                    self.data, self.targets, model=exemplar_model)
-                self.data = torch.cat(
-                    (self.data, aug_data.detach().cpu()), dim=0)
-                self.targets = torch.cat(
-                    (self.targets, aug_label.detach().cpu()), dim=0)
             elif aug == 'rs':
                 print("Re-sampling")
                 self.train_in_idx = re_sampling(self.data, self.targets)
@@ -193,13 +184,6 @@ class MNISTDataset(LightningDataModule):
                 self.mnist_train = MyMNIST(self.data_dir, train=True, transform=transform,
                                            my_target=self.target_label, downsample_size=self.downsample_size,
                                            aug='etg',
-                                           exemplar_model=self.exemplar_model)
-            elif self.aug_way == 'exemplar':
-                if self.exemplar_model == None:
-                    raise NotImplementedError("No exemplar model!")
-                self.mnist_train = MyMNIST(self.data_dir, train=True, transform=transform,
-                                           my_target=self.target_label, downsample_size=self.downsample_size,
-                                           aug='exemplar',
                                            exemplar_model=self.exemplar_model)
             elif self.aug_way == 'rs':
                 

@@ -9,7 +9,7 @@ model_params:
   pretrained: True
 
 data_params_aug:
-  data_path: "/home/qingzhong/data/celeba/celeba_hair_longtail"
+  data_path: "path of celeba data!!!"
   train_batch_size: 128
   val_batch_size: 200
   num_workers: 4
@@ -18,7 +18,7 @@ data_params_aug:
   aug_way: etg
 
 data_params_majority:
-  data_path: "/home/qingzhong/data/celeba/celeba_black_hair_20000_2000"
+  data_path: "path of majority celeba data!!!"
   train_batch_size: 100
   val_batch_size: 100
   num_workers: 4

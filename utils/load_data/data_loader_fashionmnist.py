@@ -14,11 +14,6 @@ import zipfile
 from torch.utils.data.sampler import WeightedRandomSampler
 
 from ..aug_ways import *
-# from .smote import smote
-# from .etg import ETG
-# from .exemplar_aug import exemplar_aug
-# from .re_sampling import re_sampling
-# from .cvae_aug import cvae_aug
 
 
 class MyFashionMNIST(FashionMNIST):
@@ -77,15 +72,6 @@ class MyFashionMNIST(FashionMNIST):
                     (self.targets, aug_label.detach().cpu()), dim=0)
                 # classes, class_counts = np.unique(self.targets, return_counts=True)
                 # print(class_counts)
-            elif aug == 'exemplar':
-                if exemplar_model == None:
-                    raise NotImplementedError("No exemplar model!")
-                aug_data, aug_label = exemplar_aug(
-                    self.data, self.targets, model=exemplar_model)
-                self.data = torch.cat(
-                    (self.data, aug_data.detach().cpu()), dim=0)
-                self.targets = torch.cat(
-                    (self.targets, aug_label.detach().cpu()), dim=0)
             elif aug == 'rs':
                 print("Re-sampling")
                 self.train_in_idx = re_sampling(self.data, self.targets)
@@ -191,13 +177,6 @@ class FashionMNISTDataset(LightningDataModule):
                 self.fashion_mnist_train = MyFashionMNIST(self.data_dir, train=True, transform=transform,
                                            my_target=self.target_label, downsample_size=self.downsample_size,
                                            aug='etg',
-                                           exemplar_model=self.exemplar_model)
-            elif self.aug_way == 'exemplar':
-                if self.exemplar_model == None:
-                    raise NotImplementedError("No exemplar model!")
-                self.fashion_mnist_train = MyFashionMNIST(self.data_dir, train=True, transform=transform,
-                                           my_target=self.target_label, downsample_size=self.downsample_size,
-                                           aug='exemplar',
                                            exemplar_model=self.exemplar_model)
             elif self.aug_way == 'rs':
                 
