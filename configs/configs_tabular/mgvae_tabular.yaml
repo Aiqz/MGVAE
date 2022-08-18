@@ -1,0 +1,41 @@
+dataset: tabular
+
+model_params:
+  name: 'MGVAE_Tabular'
+  input_dim: 166
+  latent_dim: 10
+  hiddden_size: 300
+  number_components: 4000
+  cur_device: 'cuda'
+  pretrained: True
+
+data_params_aug:
+  data_path: "/home/qingzhong/data/UCI"
+  data_name: "musk"
+  train_batch_size: 100
+  val_batch_size: 100
+  num_workers: 4
+  pin_memory: True
+  target_label: 0
+  aug_way: etg
+
+data_params_majority:
+  data_path: "/home/qingzhong/data/UCI"
+  data_name: "musk"
+  train_batch_size: 100
+  val_batch_size: 100
+  num_workers: 4
+  pin_memory: True
+  target_label: 1
+
+trainer_params:
+  gpus: [0]
+  max_epochs: 100
+
+exp_params:
+  LR: 0.005
+  manual_seed: 1111
+  
+logging_params:
+  save_dir: "logs/Classifcation/"
+  name: "MGVAE_musk"

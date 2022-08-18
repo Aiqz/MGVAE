@@ -1,0 +1,36 @@
+dataset: tabular
+
+model_params:
+  name: 'Condition_VAE_Tabular'
+  input_dim: 166
+  latent_dim: 10
+  num_classes: 2
+  hidden_size: 300
+  cur_device: 'cuda'
+  pretrained: True
+
+data_params_aug:
+  data_path: "/home/qingzhong/data/UCI"
+  data_name: "musk"
+  train_batch_size: 100
+  val_batch_size: 100
+  num_workers: 4
+  pin_memory: True
+  target_label: 0
+  aug_way: cvae
+
+exp_params:
+  LR: 0.0005
+  weight_decay: 0.0
+  scheduler_gamma: 0.95
+  kld_weight: 1
+  manual_seed: 1266
+
+
+trainer_params:
+  gpus: [0]
+  max_epochs: 100
+
+logging_params:
+  save_dir: "logs/Classifcation/"
+  name: "OCVAE_musk"

@@ -1,0 +1,52 @@
+dataset: fashionmnist
+
+model_params:
+  name: 'MGVAE_MLP'
+  latent_dim: 10
+  hiddden_size: 300
+  number_components: 10000
+  cur_device: 'cuda'
+  pretrained: False
+
+
+data_params_majority:
+  data_path: "/home/qingzhong/data"
+  train_batch_size: 100
+  val_batch_size: 100
+  patch_size: 64
+  num_workers: 4
+  pin_memory: True
+  target_label: [0,1,2,3,4]
+  downsample_size: [0,0,0,0,0]
+
+
+data_params_minority:
+  data_path: "/home/qingzhong/data"
+  train_batch_size: 100
+  val_batch_size: 100
+  patch_size: 64
+  num_workers: 4
+  pin_memory: True
+  target_label: [5,6,7,8,9]
+  downsample_size: [10,10,10,10,10]
+
+
+exp_params:
+  LR: 0.005
+  weight_decay: 0.0
+  # scheduler_gamma: 0.95
+  kld_weight: 1
+  manual_seed: 1265
+  ewc_weight: 5000000
+
+ewc_params:
+  ewc: False
+  ewc_weight: 5000000
+
+trainer_params:
+  gpus: [0]
+  max_epochs: 200
+
+logging_params:
+  save_dir: "logs/Oversampling_Model/"
+  name: "MGVAE_FashionMNIST"

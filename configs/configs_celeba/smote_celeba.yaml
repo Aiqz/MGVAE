@@ -1,0 +1,22 @@
+dataset: celeba
+data_params_aug:
+  data_path: "/home/qingzhong/data/celeba/celeba_hair_longtail"
+  # data_path: "/home/qingzhong/data/celeba/celeba_hair_20000_200_2000_1/celeba_hair_20000_200_2000"
+  # data_path: "/home/qingzhong/data/celeba/celeba_hair_20000_200_2000"
+  train_batch_size: 128
+  val_batch_size: 200
+  num_workers: 4
+  pin_memory: True
+  image_size: 64
+  aug_way: smote
+
+trainer_params:
+  gpus: [0]
+  max_epochs: 90
+
+exp_params:
+  manual_seed: 1000
+  
+logging_params:
+  save_dir: "logs/Classifcation/"
+  name: "SMOTE_celeba"

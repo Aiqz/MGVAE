@@ -1,0 +1,23 @@
+dataset: tabular
+
+data_params_aug:
+  data_path: "/home/qingzhong/data/UCI"
+  data_name: "musk"
+  train_batch_size: 100
+  val_batch_size: 100
+  num_workers: 4
+  pin_memory: True
+  target_label: 0
+  aug_way: cbrw
+
+trainer_params:
+  gpus: [0]
+  max_epochs: 100
+
+exp_params:
+  LR: 0.005
+  manual_seed: 1000
+  
+logging_params:
+  save_dir: "logs/Classifcation/"
+  name: "CBRW_musk"

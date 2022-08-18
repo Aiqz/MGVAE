@@ -1,0 +1,35 @@
+dataset: celeba
+
+model_params:
+  name: 'CDCGAN'
+  input_dim: 100
+  amount_classes: 5
+  filter_sizes: [1024, 512, 256, 128]
+  color_channels: 3
+  device: 'cuda'
+  image_size: 64
+  image_intervall: 1
+  tensorboard_image_rows: 10
+  batch_size: 100
+  pretrained: True
+
+data_params_aug:
+  data_path: "/home/qingzhong/data/celeba/celeba_hair_longtail"
+  train_batch_size: 128
+  val_batch_size: 200
+  num_workers: 4
+  pin_memory: True
+  image_size: 64
+  aug_way: cdcgan
+
+exp_params:
+  manual_seed: 1000
+
+
+trainer_params:
+  gpus: [0]
+  max_epochs: 90
+
+logging_params:
+  save_dir: "logs/Classifcation/"
+  name: "OCDCGAN_celeba"

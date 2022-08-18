@@ -1,0 +1,51 @@
+dataset: tabular
+
+model_params:
+  name: 'MGVAE_Tabular'
+  input_dim: 166
+  latent_dim: 10
+  hiddden_size: 300
+  number_components: 700
+  cur_device: 'cuda'
+  pretrained: False
+
+
+data_params_majority:
+  data_path: "/home/qingzhong/data/UCI"
+  data_name: "musk"
+  train_batch_size: 100
+  val_batch_size: 100
+  num_workers: 4
+  pin_memory: True
+  target_label: 1
+
+
+data_params_minority:
+  data_path: "/home/qingzhong/data/UCI"
+  data_name: "musk"
+  train_batch_size: 100
+  val_batch_size: 100
+  num_workers: 4
+  pin_memory: True
+  target_label: 2
+
+
+exp_params:
+  LR: 0.005
+  weight_decay: 0.0
+  # scheduler_gamma: 0.95
+  kld_weight: 1
+  manual_seed: 1265
+  ewc_weight: 500
+
+ewc_params:
+  ewc: False
+  ewc_weight: 500
+
+trainer_params:
+  gpus: [0]
+  max_epochs: 200
+
+logging_params:
+  save_dir: "logs/Oversampling_Model/"
+  name: "MGVAE_tabular"

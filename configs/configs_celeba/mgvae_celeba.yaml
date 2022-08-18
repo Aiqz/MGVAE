@@ -1,0 +1,44 @@
+dataset: celeba
+
+model_params:
+  name: 'MGVAE_Conv'
+  latent_dim: 40
+  hidden_size: 1536
+  number_components: 2000
+  cur_device: 'cuda'
+  pretrained: True
+
+data_params_aug:
+  data_path: "/home/qingzhong/data/celeba/celeba_hair_longtail"
+  train_batch_size: 128
+  val_batch_size: 200
+  num_workers: 4
+  pin_memory: True
+  image_size: 64
+  aug_way: etg
+
+data_params_majority:
+  data_path: "/home/qingzhong/data/celeba/celeba_black_hair_20000_2000"
+  train_batch_size: 100
+  val_batch_size: 100
+  num_workers: 4
+  image_size: 64
+
+trainer_params:
+  gpus: [0]
+  max_epochs: 90
+
+exp_params:
+  LR: 0.0005
+  weight_decay: 0.0
+  # scheduler_gamma: 0.95
+  kld_weight: 1
+  manual_seed: 1000
+
+ewc_params:
+  ewc: False
+  ewc_weight: 500
+
+logging_params:
+  save_dir: "logs/"
+  name: "MGVAE_celeba"

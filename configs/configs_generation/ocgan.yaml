@@ -1,0 +1,35 @@
+dataset: mnist
+
+model_params:
+  name: 'CGAN'
+  input_dim: 40
+  amount_classes: 2
+  color_channels: 1
+  device: 'cuda'
+  image_size: 28
+  image_intervall: 1
+  tensorboard_image_rows: 10
+  batch_size: 100
+  pretrained: False
+
+data_params:
+  data_path: "/home/qingzhong/data/"
+  train_batch_size: 100
+  val_batch_size: 100
+  num_workers: 4
+  pin_memory: True
+  target_label: [0,1,2,3,4,5,6,7,8,9]
+  downsample_size: [0,0,0,0,0,10,10,10,10,10]
+  aug_way: erm
+
+exp_params:
+  manual_seed: 1265
+
+
+trainer_params:
+  gpus: [0]
+  max_epochs: 200
+
+logging_params:
+  save_dir: "logs/Oversampling_Model/"
+  name: "OCGAN"

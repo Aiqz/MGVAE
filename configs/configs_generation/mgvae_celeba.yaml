@@ -1,0 +1,47 @@
+dataset: celeba
+
+model_params:
+  name: 'MGVAE_Conv'
+  latent_dim: 40
+  hidden_size: 1536
+  number_components: 5000
+  cur_device: 'cuda'
+  pretrained: False
+
+data_params_majority:
+  data_path: "/home/qingzhong/data/celeba/celeba_black_hair_20000_2000"
+  train_batch_size: 100
+  val_batch_size: 100
+  num_workers: 4
+  image_size: 64
+
+
+data_params_minority:
+  # data_path: "/home/qingzhong/data/celeba/celeba_blonde_10000_2000"
+  # data_path: "/home/qingzhong/data/celeba/celeba_bald_2500_2000"
+  # data_path: "/home/qingzhong/data/celeba/celeba_brown_1000_2000"
+  data_path: "/home/qingzhong/data/celeba/celeba_gray_200_2000"
+  train_batch_size: 100
+  val_batch_size: 100
+  num_workers: 4
+  image_size: 64
+
+
+exp_params:
+  LR: 0.0005
+  weight_decay: 0.0
+  # scheduler_gamma: 0.95
+  kld_weight: 1
+  manual_seed: 1265
+
+ewc_params:
+  ewc: False
+  ewc_weight: 50
+
+trainer_params:
+  gpus: [0]
+  max_epochs: 200
+
+logging_params:
+  save_dir: "logs/Oversampling_Model/"
+  name: "MGVAE_Celeba"
