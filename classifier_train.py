@@ -14,6 +14,7 @@ from pytorch_lightning.callbacks import LearningRateMonitor, ModelCheckpoint
 from pytorch_lightning.plugins import DDPPlugin
 
 from models import *
+from loss import *
 from utils import *
 
 parser = argparse.ArgumentParser(description='Classifier Training')
@@ -301,23 +302,30 @@ else:
 
 print("Weights for per class:", per_cls_weights)
 
-criterion = nn.CrossEntropyLoss(weight=per_cls_weights, reduction='none')
+if config["exp_params"]['loss'] == "FOCAL":
+    criterion = FocalLoss(weight=per_cls_weights, gamma=1.0)
+    use_norm = False
+elif config["exp_params"]['loss'] == "LDAM":
+    criterion = LDAMLoss(N_SAMPLES_PER_CLASS, max_m=0.5, s=30, weight=per_cls_weights)
+    use_norm = True
+else:
+    criterion = nn.CrossEntropyLoss(weight=per_cls_weights, reduction='none')
+    use_norm = False
 
 
 if config['dataset'] == 'celeba':
-    # criterion = nn.CrossEntropyLoss()
     cls_model = pl_resnet(num_classes=N_CLASS, criterion=criterion)
 elif config['dataset'] == 'tabular':
     if config["data_params_aug"]['data_name'] == 'musk':
-        cls_model = simple_mlp(input_dim = 166, output_dim=2, criterion=criterion)
+        cls_model = simple_mlp(input_dim = 166, output_dim=2, criterion=criterion, use_norm=use_norm)
     elif config["data_params_aug"]['data_name'] == 'water_quality':
-        cls_model = simple_mlp(input_dim = 20, output_dim=2, criterion=criterion)
+        cls_model = simple_mlp(input_dim = 20, output_dim=2, criterion=criterion, use_norm=use_norm)
     elif config["data_params_aug"]['data_name'] == 'isolet':
-        cls_model = simple_mlp(input_dim = 617, output_dim=2, criterion=criterion)
+        cls_model = simple_mlp(input_dim = 617, output_dim=2, criterion=criterion, use_norm=use_norm)
     else:
         raise NotImplementedError("Wrong tabular dataset name!")
 else:
-    cls_model = simple_mlp(input_dim=784, output_dim=2, criterion=criterion)
+    cls_model = simple_mlp(input_dim=784, output_dim=2, criterion=criterion, use_norm=use_norm)
 
 runner = Trainer(logger=tb_logger,
                  callbacks=[

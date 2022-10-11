@@ -52,6 +52,7 @@ if config['model_params']['name'] == "CGAN":
 elif config['model_params']['name'] == "CDCGAN":
     model = CDCGAN(**config['model_params'])
 
+print(model)
 # Load pretrained model
 if config['model_params']['pretrained'] == True:
     print("Loading pretrained model!")

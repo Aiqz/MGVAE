@@ -6,10 +6,20 @@ from torch.nn import functional as F
 import pytorch_lightning as pl
 from ..utils import indices
 
+class NormedLinear(nn.Module):
+
+    def __init__(self, in_features, out_features):
+        super(NormedLinear, self).__init__()
+        self.weight = nn.Parameter(torch.Tensor(in_features, out_features))
+        self.weight.data.uniform_(-1, 1).renorm_(2, 1, 1e-5).mul_(1e5)
+
+    def forward(self, x):
+        out = F.normalize(x, dim=1).mm(F.normalize(self.weight, dim=0))
+        return out
 
 class simple_mlp(pl.LightningModule):
 
-    def __init__(self, input_dim=784, output_dim=10, criterion=None):
+    def __init__(self, input_dim=784, output_dim=10, criterion=None, use_norm=False):
         super(simple_mlp, self).__init__()
 
         self.input_dim = input_dim
@@ -18,7 +28,10 @@ class simple_mlp(pl.LightningModule):
 
         self.layer_1 = nn.Linear(self.input_dim, 256)
         self.layer_2 = nn.Linear(256, 128)
-        self.layer_3 = nn.Linear(128, self.output_dim)
+        if use_norm:
+            self.layer_3 = NormedLinear(128, self.output_dim)
+        else:
+            self.layer_3 = nn.Linear(128, self.output_dim)
         self.activation_1 = nn.LeakyReLU(0.1)
         self.activation_2 = nn.Softmax(dim=1)
 

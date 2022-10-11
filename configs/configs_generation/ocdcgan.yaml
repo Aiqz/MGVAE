@@ -14,7 +14,7 @@ model_params:
   pretrained: False
 
 data_params:
-  data_path: "path of celeba data!!!"
+  data_path: "/home/qingzhong/data/celeba/celeba_hair_longtail"
   train_batch_size: 100
   val_batch_size: 100
   num_workers: 4

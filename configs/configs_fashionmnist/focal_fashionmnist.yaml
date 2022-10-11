@@ -1,0 +1,25 @@
+dataset: fashionmnist
+
+data_params_aug:
+  data_path: "path of fashionmnist!!!"
+  train_batch_size: 100
+  val_batch_size: 100
+  patch_size: 64
+  num_workers: 4
+  pin_memory: True
+  target_label: [0,1,2,3,4,5,6,7,8,9]
+  downsample_size: [0,0,0,0,0,10,10,10,10,10]
+  # downsample_size: [0,0,0,0,0,60,60,60,60,60]
+  aug_way: erm
+
+trainer_params:
+  gpus: [0]
+  max_epochs: 100
+
+exp_params:
+  loss: "FOCAL"
+  manual_seed: 1000
+  
+logging_params:
+  save_dir: "logs/Classifcation/"
+  name: "FOCAL_fashionmnist"
