@@ -7,6 +7,7 @@
 python mgvae_train.py -c "your config file!"
 ```
 Note that all config template of generative models used in our experiments are in "configs/configs_generation" directory, you need to add your data path for successfully run.
+
 **For classifier trainig:**
 ```
 python classifier_train.py -c "your config file!"
